@@ -1,0 +1,3 @@
+.env
+node_modules
+MONGODB_URI=mongodb+srv://nuevo_usuario:nueva_contraseña@cluster0.nyv36rq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
