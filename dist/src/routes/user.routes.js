@@ -1,16 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.userRouter = void 0;
-const express_1 = __importDefault(require("express"));
-const user_controller_js_1 = require("../controllers/user.controller.js");
-const authMiddleware_js_1 = require("../middlewares/authMiddleware.js");
-exports.userRouter = express_1.default.Router();
-exports.userRouter.post("/register", user_controller_js_1.add);
-exports.userRouter.post("/login", user_controller_js_1.login);
-exports.userRouter.get("/", authMiddleware_js_1.authenticateToken, authMiddleware_js_1.isAdmin, user_controller_js_1.findAll);
-exports.userRouter.get("/:id", authMiddleware_js_1.authenticateToken, user_controller_js_1.findOne);
-exports.userRouter.put("/:id", authMiddleware_js_1.authenticateToken, user_controller_js_1.update);
-exports.userRouter.delete("/:id", authMiddleware_js_1.authenticateToken, authMiddleware_js_1.isAdmin, user_controller_js_1.remove);
+import express from "express";
+import { add, findAll, findOne, update, remove, login } from "../controllers/user.controller.js";
+import { authenticateToken, isAdmin } from "../middlewares/authMiddleware.js";
+export const userRouter = express.Router();
+userRouter.post("/register", add);
+userRouter.post("/login", login);
+userRouter.get("/", authenticateToken, isAdmin, findAll);
+userRouter.get("/:id", authenticateToken, findOne);
+userRouter.put("/:id", authenticateToken, update);
+userRouter.delete("/:id", authenticateToken, isAdmin, remove);
+//# sourceMappingURL=user.routes.js.map

@@ -1,44 +1,34 @@
-import { orm } from "./config/orm"
-import { User } from "./entities/user.entity"
-import { userSchema } from "./entities/user.schema.js"
-import bcrypt from "bcrypt"
+import "reflect-metadata" ;
+import { orm , syncSchema} from "./config/orm.js"
+import cors from "cors"
+import { RequestContext } from "@mikro-orm/core"
+import express from "express"
+import { userRouter } from "./routes/user.routes.js"
 
-async function run() {
-  const em = orm.em.fork()
+import { authenticateToken } from "./middlewares/authMiddleware.js"
 
-  // Datos de prueba
-  const newUserData = {
-    dni: "12345678",
-    firstName: "Juan",
-    lastName: "Perez",
-    userType: "Client",
-    email: "juan@test.com",
-    password: "123456",
-    phoneNumber: "34431987",  
-    address: { street: "Calle Falsa 123", city: "Rosario", zip: "2000" }
-  }
+const app = express();
 
-  // Validación con Zod
-  const validation = userSchema.safeParse(newUserData)
-  if (!validation.success) {
-    console.log("Error de validación:", validation.error.format())
-    return
-  }
+app.use(express.json())
+app.use(cors())
 
-  // Hash de contraseña
-  const hashedPassword = await bcrypt.hash(newUserData.password, 10)
+app.use((req, res, next) => {
+  RequestContext.create(orm.em, next)
+})
+await syncSchema()
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-  // Crear entidad User
-  const user = em.create(User, {
-    ...newUserData,
-    userType: newUserData.userType as "Client" | "Admin" | "Employee",
-    password: hashedPassword,
-    createdAt: new Date()
-  })
+// Rutas públicas 
+app.use("/api/users/login", userRouter)
+app.use("/api/users/register", userRouter)
 
-  // Guardar en DB
-  await em.persistAndFlush(user)
-  console.log("Usuario insertado con éxito:", user)
-}
+// Rutas protegidas 
+app.use("/api/users", userRouter) 
 
-run().catch(console.error)
+app.use((req, res) => {
+  res.status(404).send({ message: "Resource not found" })
+})
+
+app.listen(3000, () => {
+  console.log("server running on http://localhost:3000")
+})

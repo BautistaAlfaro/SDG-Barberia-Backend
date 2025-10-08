@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,50 +7,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-const baseEntity_js_1 = require("../shared/baseEntity.js");
-const core_1 = require("@mikro-orm/core");
-// import {Reservation} from '../Reservation/reservation.entity.js'
-let User = class User extends baseEntity_js_1.BaseEntity {
+import { BaseEntity } from "../shared/baseEntity.js";
+import { Entity, Property } from "@mikro-orm/core";
+export let User = class User extends BaseEntity {
     constructor() {
         super(...arguments);
         this.createdAt = new Date();
-        // @OneToMany(() => Reservation, (reservation: Reservation) => reservation.user, {
-        //         cascade: [Cascade.ALL],
-        // })
-        // reservations = new Collection<Reservation>(this);
     }
 };
-exports.User = User;
 __decorate([
-    (0, core_1.Property)(),
+    Property(),
     __metadata("design:type", String)
 ], User.prototype, "firstName", void 0);
 __decorate([
-    (0, core_1.Property)(),
+    Property(),
     __metadata("design:type", String)
 ], User.prototype, "lastName", void 0);
 __decorate([
-    (0, core_1.Property)(),
+    Property(),
     __metadata("design:type", String)
 ], User.prototype, "userType", void 0);
 __decorate([
-    (0, core_1.Property)({ nullable: true }),
+    Property({ unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, core_1.Property)({ nullable: true }),
+    Property({ hidden: true }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, core_1.Property)({ nullable: true }),
+    Property({ nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "phoneNumber", void 0);
 __decorate([
-    (0, core_1.Property)({ nullable: true }),
+    Property(),
     __metadata("design:type", Date)
 ], User.prototype, "createdAt", void 0);
-exports.User = User = __decorate([
-    (0, core_1.Entity)()
+User = __decorate([
+    Entity()
 ], User);
+//# sourceMappingURL=user.entity.js.map
