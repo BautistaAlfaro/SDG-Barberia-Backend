@@ -18,9 +18,11 @@ entitiesTs: ["src/**/*.entity.ts"],
     debug: true,
     allowGlobalContext: true,
     driver: MongoDriver,
+    
 })
 
 export const syncSchema = async () => {
     const generator = orm.getSchemaGenerator();
     await generator.updateSchema();
 }
+

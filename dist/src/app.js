@@ -4,6 +4,7 @@ import cors from "cors";
 import { RequestContext } from "@mikro-orm/core";
 import express from "express";
 import { userRouter } from "./routes/user.routes.js";
+import { serviceRouter } from "./routes/service.routes.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -15,6 +16,7 @@ await syncSchema();
 // Rutas públicas 
 app.use("/api/users/login", userRouter);
 app.use("/api/users/register", userRouter);
+app.use("/api/services", serviceRouter);
 // Rutas protegidas 
 app.use("/api/users", userRouter);
 app.use((req, res) => {

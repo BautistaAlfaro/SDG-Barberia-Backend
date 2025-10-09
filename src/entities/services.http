@@ -1,0 +1,67 @@
+### Obtener todos los servicios
+GET http://localhost:3000/api/services
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTczZDQ2YWE2ZGM0NGU5MWMwZDgzMCIsInVzZXJUeXBlIjoiQWRtaW4iLCJpYXQiOjE3NTk5ODQ5NjYsImV4cCI6MTc1OTk4ODU2Nn0.WcpnoTbMzFWA5VnzU_d26c2O9_2nlkDcSytzHDE8zv4
+
+
+### Crear un nuevo servicio
+POST http://localhost:3000/api/services
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTczZTZlZTczOWVhNDk3YjMzNTgzOSIsInVzZXJUeXBlIjoiQWRtaW4iLCJpYXQiOjE3NTk5ODUyNjIsImV4cCI6MTc1OTk4ODg2Mn0.9k3tZVMWobkdfYgCvrSa4GY847SJvbR7-rFAxYTu7ZU
+
+{
+  "name": "Corte",
+  "description": "Corte profesional con lavado incluido",
+  "price": "3500",
+  "duracion": "45",
+  "activo": "Activo"
+}
+
+
+### Crear otro servicio
+POST http://localhost:3000/api/services
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTczZTZlZTczOWVhNDk3YjMzNTgzOSIsInVzZXJUeXBlIjoiQWRtaW4iLCJpYXQiOjE3NTk5ODUyNjIsImV4cCI6MTc1OTk4ODg2Mn0.9k3tZVMWobkdfYgCvrSa4GY847SJvbR7-rFAxYTu7ZU
+
+{
+  "name": "Afeitado clásico",
+  "description": "Afeitado con toalla caliente y navaja",
+  "price": "2500",
+  "duracion": "30min",
+  "activo": "Activo"
+}
+
+
+### Obtener un servicio por ID
+GET http://localhost:3000/api/services/672f10abc1234567890defff
+Content-Type: application/json
+Authorization: Bearer 
+
+
+### Actualizar un servicio
+PUT http://localhost:3000/api/services/672f10abc1234567890defff
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "name": "Corte y barba premium",
+  "price": "4000",
+  "duracion": "1h",
+  "activo": "Activo"
+}
+
+
+### Eliminar un servicio
+DELETE http://localhost:3000/api/services/672f10abc1234567890defff
+Content-Type: application/json
+Authorization: Bearer 
+
+
+### Filtrar servicios por precio mínimo
+GET http://localhost:3000/api/services?minPrice=2000
+Content-Type: application/json
+Authorization: Bearer 
+### Filtrar servicios por nombre parcial
+GET http://localhost:3000/api/services?name=corte
+Content-Type: application/json
+Authorization: Bearer 
